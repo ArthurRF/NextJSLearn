@@ -1,9 +1,19 @@
-import type { NextPage } from 'next'
+import Head from 'next/head'
+import { Container } from '../styles/pages/Home';
 
-const Home: NextPage = () => {
+const Home: React.FC = () => {
   return (
-    <h1>Hello, world!</h1>
+    <Container>
+      <Head>
+        <title>Homepage</title>
+      </Head>
+
+      {/* <button>Todo List</button> */}
+
+      <h1>Basic ReactJS Learning</h1>
+      <p>Structure and styles knowledge improving...</p>
+    </Container >
   )
 }
 
-export default Home
+export default Home;
