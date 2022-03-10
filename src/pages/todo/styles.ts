@@ -70,6 +70,7 @@ export const ListBody = styled.div`
     }
 
     div.management {
+      margin-left: auto;
       padding: 0px 30px;
     }
   }
