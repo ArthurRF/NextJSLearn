@@ -2,21 +2,21 @@
 import Link from 'next/link';
 import * as S from './styles';
 
-type NavbarProps = {
+type TNavbarProps = {
   keys: {
     name: string,
     href: string,
   }[]
 }
 
-export function Navbar({ keys }: NavbarProps) {
+export function Navbar({ keys }: TNavbarProps) {
   return (
     <S.Container>
       <ul>
         {
           keys.map(key => {
             return (
-              <li>
+              <li key={key.href}>
                 <Link href={key.href}>
                   <a>{key.name}</a>
                 </Link>

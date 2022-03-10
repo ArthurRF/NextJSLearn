@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           href: '/',
         },
         {
-          name: 'Todo List',
+          name: 'To Do List',
           href: '/todo',
         }
       ]} />
