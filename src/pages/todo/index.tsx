@@ -1,6 +1,7 @@
 import Head from 'next/head'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as S from './styles';
+import { FaPencilAlt, FaToggleOn, FaTrashAlt } from 'react-icons/fa';
 
 type TThingTodo = {
   done: boolean,
@@ -11,6 +12,7 @@ type TThingTodo = {
 const Home: React.FC = () => {
 
   const [thingsTodo, setThingsTodo] = useState<TThingTodo[]>([]);
+  const [newThingMessage, setNewThingMessage] = useState<string>('');
 
   function handleAddThingTodo(thingTodo: TThingTodo): void {
     return setThingsTodo([...thingsTodo, thingTodo]);
@@ -24,9 +26,32 @@ const Home: React.FC = () => {
 
       <S.ListContainer>
         <S.ManagerContainer>
-          <S.AddButton onClick={_ => handleAddThingTodo({ done: false, message: "Nova coisa pra fazer", priority: 1 })}>
-            + Something To Do
-          </S.AddButton>
+          <div>
+            <S.InputContainer
+              type='text'
+              id='todo_message'
+              placeholder='Type here what you have to do...'
+              value={newThingMessage} onInput={e => {
+                setNewThingMessage((e.target as HTMLTextAreaElement).value)
+              }}
+            />
+
+            <S.AddButton onClick={_ => {
+              const newThingTodo: TThingTodo = {
+                done: false,
+                message: document.getElementById('todo_message')?.getAttribute('value') || '',
+                priority: 0,
+              };
+
+              if (!newThingTodo.message) {
+                alert('Please insert a message to be added');
+              } else {
+                handleAddThingTodo(newThingTodo)
+              }
+            }}>
+              + Something To Do
+            </S.AddButton>
+          </div>
         </S.ManagerContainer>
 
         <S.ListHeader>
@@ -38,9 +63,14 @@ const Home: React.FC = () => {
               thingsTodo.map((item, index) => {
                 return (
                   <li key={index}>
-                    <div className='slider'>:slider:</div>
+                    <div className='slider'>
+                      <S.StyledCheckbox />
+                    </div>
                     {item.message}
-                    <div className="management">:thrash:</div>
+                    <div className="management">
+                      <FaPencilAlt className='item_manager edition' key={`edition_${index}`} />
+                      <FaTrashAlt className='item_manager deletion' key={`deletion_${index}`} />
+                    </div>
                   </li>
                 );
               })

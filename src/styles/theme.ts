@@ -5,6 +5,8 @@ const theme = {
     text: '#e1e1e6',
     primary: '#2b6b39',
     primaryLight: '#119b2f',
+    deletion: '#ff2121',
+    edition: '#fffa2c',
   }
 }
 

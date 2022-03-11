@@ -5,11 +5,25 @@ export const ManagerContainer = styled.div`
   display: flex;
 
   flex-direction: column;
-  align-items: flex-end;
+
+  div {
+    width: 90vw;
+    display: flex;
+  }
+`;
+
+export const InputContainer = styled.input`
+  width: 30vw;
+  margin-right: auto;
+  padding: 0 0.6vw;
+
+  border-radius: 10px;
+  background-color: ${props => props.theme.colors.text};
 `;
 
 export const AddButton = styled.button`
-  padding: 5px 10px;
+  padding: 0.3vw 0.6vw;
+  margin-left: auto;
 
   border-radius: 10px;
   border-style: none;
@@ -71,7 +85,26 @@ export const ListBody = styled.div`
 
     div.management {
       margin-left: auto;
-      padding: 0px 30px;
+      padding: 0 2vw;
+
+      .item_manager {
+        margin: 0 0.5vw;
+        cursor: pointer;
+
+        font-size: 0.9em;
+      }
+
+      .edition:hover {
+        transition: 150ms;
+        color: ${props => props.theme.colors.edition};
+        font-size: 0.95em;
+      }
+
+      .deletion:hover {
+        transition: 150ms;
+        color: ${props => props.theme.colors.deletion};
+        font-size: 0.95em;
+      }
     }
   }
 `;
@@ -81,3 +114,11 @@ export const ListItem = styled.li`
   height: 5vh;
   margin-top: 5px;
 `;
+
+export const StyledCheckbox = styled.button`
+  display: inline-block;
+  width: 1.5em;
+  height: 1em;
+  border-radius: 15px;
+  transition: all 150ms;
+`
