@@ -37,9 +37,11 @@ const Home: React.FC = () => {
             />
 
             <S.AddButton onClick={_ => {
+              const todoMessage = document.getElementById('todo_message');
+
               const newThingTodo: TThingTodo = {
                 done: false,
-                message: document.getElementById('todo_message')?.getAttribute('value') || '',
+                message: todoMessage?.getAttribute('value') || '',
                 priority: 0,
               };
 
@@ -47,6 +49,7 @@ const Home: React.FC = () => {
                 alert('Please insert a message to be added');
               } else {
                 handleAddThingTodo(newThingTodo)
+                todoMessage?.append('');
               }
             }}>
               + Something To Do
@@ -69,7 +72,9 @@ const Home: React.FC = () => {
                     {item.message}
                     <div className="management">
                       <FaPencilAlt className='item_manager edition' key={`edition_${index}`} />
-                      <FaTrashAlt className='item_manager deletion' key={`deletion_${index}`} />
+                      <FaTrashAlt className='item_manager deletion' key={`deletion_${index}`} onClick={_ => {
+                        setThingsTodo(thingsTodo.filter((_, i) => i !== index))
+                      }} />
                     </div>
                   </li>
                 );
