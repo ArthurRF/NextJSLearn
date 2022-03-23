@@ -138,11 +138,35 @@ export const StyledCheckbox = styled.div<ICheckboxProps>`
 
   background-color: ${props => props.alreadyDone ? props.theme.colors.primaryLight : props.theme.colors.text};
 `
+
+export const ModalContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  text-align: center;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+`;
+
 export const ModalInput = styled.div`
   width: 75vw;
   height: 45vh;
   border-radius: 15px;
 
   background-color: white;
-  z-index: 10;
+`;
+
+export const CloseModal = styled.div`
+
+  position: absolute;
+  width: 5vw;
+  height: 5vh;
+  border-radius: 15px;
+  transition: all 150ms;
+  cursor: pointer;
+  border: 1px solid ${props => props.theme.colors.primary};
 `;

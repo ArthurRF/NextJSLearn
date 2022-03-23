@@ -21,14 +21,21 @@ const Home: React.FC = () => {
         <title>To Do List</title>
       </Head>
 
+      <button onClick={_ => setIsModalVisible(!isModalVisible)}>teste</button>
+      {
+        isModalVisible &&
+        <S.ModalContainer>
+          <S.ModalInput>
+            <S.CloseModal />
+          </S.ModalInput>
+        </S.ModalContainer>
+      }
+
       <S.ListContainer>
-        <button onClick={_ => setIsModalVisible(!isModalVisible)}>teste</button>
-        {isModalVisible && <S.ModalInput />}
         <S.ManagerContainer>
           <div>
             <S.InputContainer
               type='text'
-              id='todo_message'
               placeholder='Type here what you have to do...'
               value={newThingMessage} onChange={e => {
                 setNewThingMessage(e.target.value)
