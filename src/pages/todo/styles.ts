@@ -145,17 +145,17 @@ export const ModalContainer = styled.div`
   position: absolute;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
 
-  text-align: center;
-  align-items: center;
-  align-self: center;
-  align-content: center;
+  display: grid;
+  place-items: center;
 `;
 
 export const ModalInput = styled.div`
   width: 75vw;
   height: 45vh;
   border-radius: 15px;
+
 
   background-color: white;
 `;
