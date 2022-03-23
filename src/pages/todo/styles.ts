@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ICheckboxProps {
+  alreadyDone: boolean;
+}
+
 export const ManagerContainer = styled.div`
   width: 90vw;
   display: flex;
@@ -15,14 +19,14 @@ export const ManagerContainer = styled.div`
 export const InputContainer = styled.input`
   width: 30vw;
   margin-right: auto;
-  padding: 0 0.6vw;
+  padding: 0 0.7vw;
 
   border-radius: 10px;
   background-color: ${props => props.theme.colors.text};
 `;
 
 export const AddButton = styled.button`
-  padding: 0.3vw 0.6vw;
+  padding: 0.5vw 0.7vw;
   margin-left: auto;
 
   border-radius: 10px;
@@ -73,37 +77,45 @@ export const ListBody = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
+    word-break: break-all;
 
-    padding: 0.5vh;
+    padding: 0.5vh 0;
     border: 1px solid ${props => props.theme.colors.primary};
     border-top: 0px;
     border-radius: 5px;
 
     .slider {
       padding: 0px 30px;
+      align-self: center;
+    }
+
+    .message {
+      width: 100%;
     }
 
     div.management {
       margin-left: auto;
-      padding: 0 2vw;
+      padding: 0 1.5vw;
+      align-self: center;
+      width: 11%;
 
       .item_manager {
         margin: 0 0.5vw;
         cursor: pointer;
 
-        font-size: 0.9em;
+        font-size: 0.8em;
       }
 
       .edition:hover {
         transition: 150ms;
         color: ${props => props.theme.colors.edition};
-        font-size: 0.95em;
+        font-size: 0.85em;
       }
 
       .deletion:hover {
         transition: 150ms;
         color: ${props => props.theme.colors.deletion};
-        font-size: 0.95em;
+        font-size: 0.85em;
       }
     }
   }
@@ -115,10 +127,22 @@ export const ListItem = styled.li`
   margin-top: 5px;
 `;
 
-export const StyledCheckbox = styled.button`
+export const StyledCheckbox = styled.div<ICheckboxProps>`
   display: inline-block;
-  width: 1.5em;
-  height: 1em;
+  width: 1em;
+  height: 0.8em;
   border-radius: 15px;
   transition: all 150ms;
+  cursor: pointer;
+  border: 1px solid ${props => props.alreadyDone ? props.theme.colors.text : props.theme.colors.primary};
+
+  background-color: ${props => props.alreadyDone ? props.theme.colors.primaryLight : props.theme.colors.text};
 `
+export const ModalInput = styled.div`
+  width: 75vw;
+  height: 45vh;
+  border-radius: 15px;
+
+  background-color: white;
+  z-index: 10;
+`;

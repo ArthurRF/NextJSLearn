@@ -13,10 +13,7 @@ const Home: React.FC = () => {
 
   const [thingsTodo, setThingsTodo] = useState<TThingTodo[]>([]);
   const [newThingMessage, setNewThingMessage] = useState<string>('');
-
-  function handleAddThingTodo(thingTodo: TThingTodo): void {
-    return setThingsTodo([...thingsTodo, thingTodo]);
-  }
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   return (
     <>
@@ -25,31 +22,31 @@ const Home: React.FC = () => {
       </Head>
 
       <S.ListContainer>
+        <button onClick={_ => setIsModalVisible(!isModalVisible)}>teste</button>
+        {isModalVisible && <S.ModalInput />}
         <S.ManagerContainer>
           <div>
             <S.InputContainer
               type='text'
               id='todo_message'
               placeholder='Type here what you have to do...'
-              value={newThingMessage} onInput={e => {
-                setNewThingMessage((e.target as HTMLTextAreaElement).value)
+              value={newThingMessage} onChange={e => {
+                setNewThingMessage(e.target.value)
               }}
             />
 
             <S.AddButton onClick={_ => {
-              const todoMessage = document.getElementById('todo_message');
-
               const newThingTodo: TThingTodo = {
                 done: false,
-                message: todoMessage?.getAttribute('value') || '',
+                message: newThingMessage,
                 priority: 0,
               };
 
               if (!newThingTodo.message) {
                 alert('Please insert a message to be added');
               } else {
-                handleAddThingTodo(newThingTodo)
-                todoMessage?.append('');
+                setThingsTodo([...thingsTodo, newThingTodo]);
+                setNewThingMessage('');
               }
             }}>
               + Something To Do
@@ -67,9 +64,15 @@ const Home: React.FC = () => {
                 return (
                   <li key={index}>
                     <div className='slider'>
-                      <S.StyledCheckbox />
+                      <S.StyledCheckbox alreadyDone={item.done} onClick={() => {
+                        let allThingsTodo = [...thingsTodo];
+                        allThingsTodo[index].done = !allThingsTodo[index].done;
+                        setThingsTodo(allThingsTodo);
+                      }} />
                     </div>
-                    {item.message}
+                    <div className='message'>
+                      {item.message}
+                    </div>
                     <div className="management">
                       <FaPencilAlt className='item_manager edition' key={`edition_${index}`} />
                       <FaTrashAlt className='item_manager deletion' key={`deletion_${index}`} onClick={_ => {
